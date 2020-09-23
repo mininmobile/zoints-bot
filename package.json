@@ -1,0 +1,24 @@
+{
+  "name": "zoints-bot",
+  "version": "1.0.0",
+  "description": "discord bot for managing zoints",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mininmobile/zoints-bot.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mininmobile/zoints-bot/issues"
+  },
+  "homepage": "https://github.com/mininmobile/zoints-bot#readme",
+  "dependencies": {
+    "discord.js": "^12.3.1",
+    "dotenv": "^8.2.0",
+    "moment": "^2.29.0"
+  }
+}
