@@ -91,7 +91,7 @@ setTimeout(() => {
 		data.forEach((f) => {
 			let module = require("./commands/" + f);
 
-			module.emit("init", [scope]);
+			module.emit("init", [scope, util]);
 
 			module.commands.forEach(c => commands[c] = module.callbacks[c]);
 
