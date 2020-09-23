@@ -51,10 +51,10 @@ bot.on("ready", () => {
 			case "status": {
 				let memUsed = Math.round(process.memoryUsage().rss / Math.pow(1024, 2));
 				let memTotal = Math.round(os.totalmem / Math.pow(1024, 2));
-				let memPrecent = Math.round((memUsed / memTotal) * 100);
+				let memPercent = Math.round((memUsed / memTotal) * 100);
 
 				let lines = [
-					`**Memory** ${memUsed}mb/${memTotal}mb (${memPrecent}%)`,
+					`**Memory** ${memUsed}mb/${memTotal}mb (${memPercent}%)`,
 					`**Node Version** ${process.version}`,
 					`**Discord.js Version** v${discord.version}`,
 					`**Uptime** ${util.formatSecs(Math.floor(bot.uptime/1000))}`,
