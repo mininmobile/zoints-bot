@@ -4,10 +4,17 @@ const util = require("./lib/util");
 
 const os = require("os");
 const discord = require("discord.js");
+const { readFile } = require("fs");
 const bot = new discord.Client();
 
+let scope = {
+	bot: bot,
+}
+
+let commands = {}
+
 bot.on("ready", () => {
-	util.debug("bot connected");
+	util.log("bot connected");
 });
 
 { // onMessage
@@ -69,7 +76,9 @@ bot.on("ready", () => {
 			} break;
 
 			default: {
-				// code
+				if (commands[command[0]]) {
+					commands[command[0]](message, scope, util);
+				}
 			}
 		}
 	});
@@ -77,6 +86,19 @@ bot.on("ready", () => {
 
 util.debug("waiting to start bot...");
 setTimeout(() => {
-	util.debug("starting bot...");
-	bot.login(process.env.TOKEN);
+	util.debug("loading commands...");
+	util.readdir("commands").then((data) => {
+		data.forEach((f) => {
+			let module = require("./commands/" + f);
+
+			module.emit("init", [scope]);
+
+			module.commands.forEach(c => commands[c] = module.callbacks[c]);
+
+			util.log("registered module: " + f);
+		});
+	}).then(() => {
+		util.debug("starting bot...");
+		bot.login(process.env.TOKEN);
+	}).catch(util.err);
 }, 5000);
